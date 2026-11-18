@@ -1,0 +1,43 @@
+import random
+
+def input_int(text = "Введите число:"):
+    while True:
+        number = input(text)
+        if number.isdigit():
+            return int(number)
+        else:
+            print("вы ввели не число!!")
+
+
+def generate_deck():
+    suits = "♠️♣️♥️♦️"
+    cards = "2 3 4 5 6 7 8 9 10 В Д К Т".split()
+    deck = []
+
+    for suit in suits:
+        for card in cards:
+            if card == "В" or card == "Д" or card == "К":
+                new_card = (10, card + suit)
+            elif card == "Т":
+                new_card = (11, card + suit)
+
+            else:
+                new_card = (int(card), card + suit)
+            deck.append(new_card)
+    return deck 
+
+
+def get_random_cards(deck, count=1):
+    cards = []
+    for i in range(count):
+        random_card = random.choice(deck)
+        deck.remove(random_card)
+        cards.append(random_card)
+    return cards
+
+
+
+deck = generate_deck()
+
+my_cards = get_random_cards(deck, 5)
+print(my_cards)
